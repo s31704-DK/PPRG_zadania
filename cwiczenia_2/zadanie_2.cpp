@@ -1,3 +1,5 @@
+//Program wskazujacy liczby zaprzyjaznione z zadanego zakresu.
+
 #include <iostream>
 using namespace std;
 
