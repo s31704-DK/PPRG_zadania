@@ -70,16 +70,17 @@ int main() {
                     cout << wyborGraczaChars << " vs " << wyborKomputera << endl << "Remis" << endl;
                 }
         }
+
         cout << "Czy chesz zagrac jeszcze raz? (y/n)" << endl;
         cin >> yesNo;
 
         if (yesNo == "y") {
-
             grajDalej = true;
         } else {
-
             grajDalej = false;
         }
+        //poprzedni problem byl spowodowany znakiem nowej linii pozostajacym w pamieci
+        cin.get();
     }
 
     return 0;
