@@ -58,8 +58,20 @@ void wyswietlOsobyStarsze(Osoba osoby[], int wiekGraniczny, int N=4) {
 }
 
 //5
+Osoba tablicaUzytkownika[] = {};
 void wprowadzDane(int rozmiar){
-    Osoba tablicaUzytkownika[rozmiar];
+    string imieOsoby;
+    string nazwiskoOsoby;
+    int wiekOsoby;
+    for (int i = 0; i < rozmiar; i++) {
+        cout << "Podaj po kolei imie, nazwisko i wiek pracownika, kazde zatwierdzajac" << endl;
+        getline(cin, imieOsoby);
+        getline(cin, nazwiskoOsoby);
+        cin >> wiekOsoby;
+        Osoba osobaUzytkownika = {imieOsoby, nazwiskoOsoby, wiekOsoby};
+        tablicaUzytkownika[i] = osobaUzytkownika;
+        cin.get();
+    }
 }
 
 int main() {
