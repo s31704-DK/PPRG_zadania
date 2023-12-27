@@ -86,5 +86,47 @@ int main() {
     //wyswietlOsoby(tablica, 4);
     //wyswietlOsobyStarsze(tablica, 55);
 
+
+
+    //menu
+    bool menuGlowne = true;
+
+    while (menuGlowne) {
+        int wyborUzytkownika;
+        bool czyMenuGlowne = false;
+        int czyPosortowani;
+        cout << "Witaj! Wybierz, co chcesz zrobic (wybierz pozycje i zatwierdz):" << endl
+             << "1. Wprowadz osoby" << endl
+             << "2. Wyswietl wszystkie osoby" << endl
+             << "3. Wyswietl wybrane osoby" << endl
+             << "4. Filtruj osoby" << endl
+             << "5. Zakoncz" << endl;
+        cin >> wyborUzytkownika;
+
+
+        unsigned int ileOsob;
+        switch(wyborUzytkownika) {
+            case 1:
+                cout << "Podaj ile osob chcesz wprowadzic do bazy" << endl;
+                cin >> ileOsob;
+                cin.get();
+                if (ileOsob == 0) {
+                    break;
+                } else {
+                    wprowadzDane(ileOsob);
+                }
+                break;
+            case 2:
+                wyswietlOsoby(tablicaUzytkownika, ileOsob);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                menuGlowne = false;
+        }
+    }
+
     return 0;
 }
