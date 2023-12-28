@@ -9,7 +9,9 @@ using namespace std;
     z ograniczonych umiejetnosci czy czasu, np.:
         -funkcja sortujaca dziala bezposrednio na tablicy, a nie na jej kopii, totez,
             totez po posortowaniu jej zawartosci nie da sie odwrocic tego procesu.
-        -brak zabezpieczenia przed nieprawidlowymi wartosciami lub typami danych*/
+        -brak zabezpieczenia przed nieprawidlowymi wartosciami lub typami danych
+        -usuwanie danych dziala wirtualnie - rozmiar tablicy nie ulega zmianie,
+            jedynie widok*/
 
 //1
 struct Osoba {
@@ -98,6 +100,15 @@ void dodajDane(int obecnaLiczbaRekordow, int liczbaNowychRekordow) {
     }
 }
 
+void usunDane(unsigned int obecnaLiczbaRekordow, unsigned int indeksDoUsuniecia) {
+    indeksDoUsuniecia -= 1;
+    for (int i = indeksDoUsuniecia; i < obecnaLiczbaRekordow; i++) {
+        tablicaUzytkownika[i].imie = tablicaUzytkownika[i+1].imie;
+        tablicaUzytkownika[i].nazwisko = tablicaUzytkownika[i+1].nazwisko;
+        tablicaUzytkownika[i].wiek = tablicaUzytkownika[i+1].wiek;
+    }
+}
+
 int main() {
     //6, 7 - menu
     bool menuGlowne = true;
@@ -110,6 +121,7 @@ int main() {
         unsigned int ileOsob;
         unsigned int ileDodac;
         unsigned int ileRekordow;
+        unsigned int ktoryRekord;
 
         cout << "Witaj! Wybierz, co chcesz zrobic (wybierz pozycje i zatwierdz):" << endl
              << "1. Wprowadz osoby" << endl
@@ -117,7 +129,8 @@ int main() {
              << "3. Wyswietl wszystkie osoby" << endl
              << "4. Wyswietl wybrane osoby" << endl
              << "5. Filtruj osoby po wieku" << endl
-             << "6. Zakoncz" << endl; //7
+             << "6. Usun osoby" << endl
+             << "7. Zakoncz" << endl; //7
         cin >> wyborUzytkownika;
 
         switch(wyborUzytkownika) {
@@ -192,6 +205,24 @@ int main() {
                 }
                 break;
             case 6:
+                cout << "Podaj, ktory rekord chcesz usunac albo wprowadz 0, aby powrocic"
+                        "do menu glownego" << endl;
+                cin >> ktoryRekord;
+                cin.get();
+                if (ktoryRekord == 0) {
+                    break;
+                } else if (ktoryRekord == ileOsob) {
+                    ileOsob -= 1;
+                    break;
+                } else if (ktoryRekord > ileOsob) {
+                    cout << "Nie ma takiego rekordu" << endl;
+                    break;
+                } else {
+                    usunDane(ileOsob, ktoryRekord);
+                    ileOsob -= 1;
+                    break;
+                }
+            case 7:
                 menuGlowne = false;
         }
     }
