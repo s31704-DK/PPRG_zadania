@@ -6,11 +6,10 @@ using namespace std;
     Menu bedzie dzialac, dopoki nie zostanie wprowadzona odpowiednia wartosc konczaca
     dzialanie programu.
     Niemniej jednak program oczywiscie zawiera wady z tym zwiazane wynikajace
-    z ograniczonych umiejetnosci
-    czy czasu:
-        -funkcja dodajaca kolejne rekordy do tablicy bedzie tworzyc nowa tablice od indeksu 0;
+    z ograniczonych umiejetnosci czy czasu, np.:
         -funkcja sortujaca dziala bezposrednio na tablicy, a nie na jej kopii, totez,
-            totez po posortowaniu jej zawartosci nie da sie odwrocic tego procesu.*/
+            totez po posortowaniu jej zawartosci nie da sie odwrocic tego procesu.
+        -brak zabezpieczenia przed nieprawidlowymi wartosciami lub typami danych*/
 
 //1
 struct Osoba {
@@ -84,6 +83,21 @@ void wprowadzDane(int rozmiar){
     }
 }
 
+void dodajDane(int obecnaLiczbaRekordow, int liczbaNowychRekordow) {
+    string imieOsoby;
+    string nazwiskoOsoby;
+    int wiekOsoby;
+    for (int i = obecnaLiczbaRekordow; i < obecnaLiczbaRekordow + liczbaNowychRekordow; i++) {
+        cout << "Podaj po kolei imie, nazwisko i wiek pracownika, kazde zatwierdzajac" << endl;
+        getline(cin, imieOsoby);
+        getline(cin, nazwiskoOsoby);
+        cin >> wiekOsoby;
+        Osoba osobaUzytkownika = {imieOsoby, nazwiskoOsoby, wiekOsoby};
+        tablicaUzytkownika[i] = osobaUzytkownika;
+        cin.get();
+    }
+}
+
 int main() {
     //6, 7 - menu
     bool menuGlowne = true;
@@ -94,14 +108,16 @@ int main() {
         unsigned int czyPosortowani;
         unsigned int wiekGraniczny;
         unsigned int ileOsob;
+        unsigned int ileDodac;
         unsigned int ileRekordow;
 
         cout << "Witaj! Wybierz, co chcesz zrobic (wybierz pozycje i zatwierdz):" << endl
              << "1. Wprowadz osoby" << endl
-             << "2. Wyswietl wszystkie osoby" << endl
-             << "3. Wyswietl wybrane osoby" << endl
-             << "4. Filtruj osoby po wieku" << endl
-             << "5. Zakoncz" << endl; //7
+             << "2. Dodaj osoby" << endl
+             << "3. Wyswietl wszystkie osoby" << endl
+             << "4. Wyswietl wybrane osoby" << endl
+             << "5. Filtruj osoby po wieku" << endl
+             << "6. Zakoncz" << endl; //7
         cin >> wyborUzytkownika;
 
         switch(wyborUzytkownika) {
@@ -113,9 +129,20 @@ int main() {
                     break;
                 } else {
                     wprowadzDane(ileOsob);
+                    break;
                 }
-                break;
             case 2:
+                cout << "Podaj ile osob chcesz dodac do bazy" << endl;
+                cin >> ileDodac;
+                cin.get();
+                if (ileOsob == 0) {
+                    break;
+                } else {
+                    dodajDane(ileOsob, ileDodac);
+                    ileOsob += ileDodac;
+                    break;
+                }
+            case 3:
                 czyWyjscDoMenuGlowne = false;
                 while (!czyWyjscDoMenuGlowne) {
                     cout << "1) Wyswietl posortowana liste" << endl
@@ -136,7 +163,7 @@ int main() {
                     }
                 }
                 break;
-            case 3:
+            case 4:
                 czyWyjscDoMenuGlowne = false;
                 while (!czyWyjscDoMenuGlowne) {
                     cout << "Podaj ilosc rekordow albo 0, aby wyjsc do menu glownego" << endl;
@@ -151,7 +178,7 @@ int main() {
                     }
                 }
                 break;
-            case 4:
+            case 5:
                 czyWyjscDoMenuGlowne = false;
                 while (!czyWyjscDoMenuGlowne) {
                     cout << "Podaj wiek graniczny albo 0, aby wyjsc do menu glownego" << endl;
@@ -164,7 +191,7 @@ int main() {
                     }
                 }
                 break;
-            case 5:
+            case 6:
                 menuGlowne = false;
         }
     }
