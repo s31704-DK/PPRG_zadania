@@ -103,9 +103,7 @@ void dodajDane(int obecnaLiczbaRekordow, int liczbaNowychRekordow) {
 void usunDane(unsigned int obecnaLiczbaRekordow, unsigned int indeksDoUsuniecia) {
     indeksDoUsuniecia -= 1;
     for (int i = indeksDoUsuniecia; i < obecnaLiczbaRekordow; i++) {
-        tablicaUzytkownika[i].imie = tablicaUzytkownika[i+1].imie;
-        tablicaUzytkownika[i].nazwisko = tablicaUzytkownika[i+1].nazwisko;
-        tablicaUzytkownika[i].wiek = tablicaUzytkownika[i+1].wiek;
+        tablicaUzytkownika[i] = tablicaUzytkownika[i+1];
     }
 }
 
