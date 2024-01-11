@@ -4,7 +4,9 @@ using namespace std;
 /* 8
     Przedstawione menu przewiduje wielokrotne skorzystanie z zawartych wen funkcji.
     Menu bedzie dzialac, dopoki nie zostanie wprowadzona odpowiednia wartosc konczaca
-    dzialanie programu.
+    dzialanie programu. Na potrzeby "ciaglego" uzywania menu, funkcje modyfikujace
+    tablice z danymi Osob zostaly zaimplemetnowane, aby takie korzystanie z programu w ogole
+    mialo sens.
     Niemniej jednak program oczywiscie zawiera wady z tym zwiazane wynikajace
     z ograniczonych umiejetnosci czy czasu, np.:
         -funkcja sortujaca dziala bezposrednio na tablicy, a nie na jej kopii, totez,
